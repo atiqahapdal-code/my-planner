@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>📅 My Planner</h1>
+
+<a href="/logout">Logout</a>
+<br><br>
+
+<a href="/add">
+    <button>Add Task</button>
+</a>
+
+<div class="container">
+
+{% for task in tasks %}
+
+<div class="card">
+
+    <h3>
+        {% if task.completed %}
+            ✅ <s>{{ task.title }}</s>
+        {% else %}
+            {{ task.title }}
+        {% endif %}
+    </h3>
+
+    <p>📅 {{ task.due }}</p>
+    <p>⚡ {{ task.priority }}</p>
+
+    <a href="/complete/{{ task.id }}">
+        <button>Complete</button>
+    </a>
+
+    <a href="/edit/{{ task.id }}">
+        <button>Edit</button>
+    </a>
+
+    <a href="/delete/{{ task.id }}">
+        <button>Delete</button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
